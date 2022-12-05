@@ -8,9 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inputs", "Inputs", "{1B32A859-E4A4-4565-BCA3-C4465607E1B0}"
 	ProjectSection(SolutionItems) = preProject
 		Inputs\Day01.txt = Inputs\Day01.txt
+		Inputs\Day02.txt = Inputs\Day02.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvers", "Solvers\Solvers.csproj", "{02615387-77C7-4B43-8079-6CA3A8F2BFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solvers", "Solvers\Solvers.csproj", "{02615387-77C7-4B43-8079-6CA3A8F2BFE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

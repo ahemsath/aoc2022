@@ -18,6 +18,11 @@ namespace PuzzleSolver
                 var solver = new Day01(inputFile);
                 Console.WriteLine($"Day01: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
             }
+            if (inputFile.Contains("Day02"))
+            {
+                var solver = new Day02(inputFile);
+                Console.WriteLine($"Day02: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
+            }
         }
     }
 }
