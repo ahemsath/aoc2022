@@ -9,7 +9,7 @@
             _inputFile = inputFile;
         }
 
-        public int Answer1()
+        public string Answer1()
         {
             int currentCalories = 0;
             int maxCalories = 0;
@@ -28,10 +28,10 @@
                     }
                 }
             }
-            return maxCalories;
+            return maxCalories.ToString();
         }
 
-        public int Answer2()
+        public string Answer2()
         {
             var descendingComparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
 
@@ -55,7 +55,7 @@
 
             var descCalorieCounts = calorieCounts.OrderByDescending(x => x).ToArray();
 
-            return descCalorieCounts[0] + descCalorieCounts[1] + descCalorieCounts[2];
+            return (descCalorieCounts[0] + descCalorieCounts[1] + descCalorieCounts[2]).ToString();
         }
     }
 }
