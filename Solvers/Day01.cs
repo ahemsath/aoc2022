@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Solvers
+﻿namespace Solvers
 {
     public class Day01 : ISolver
     {

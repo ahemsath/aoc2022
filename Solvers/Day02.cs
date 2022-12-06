@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Solvers
+﻿namespace Solvers
 {
     public enum Shape
     {

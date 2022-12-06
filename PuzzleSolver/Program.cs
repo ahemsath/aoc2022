@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Solvers;
 
 namespace PuzzleSolver
@@ -13,21 +14,16 @@ namespace PuzzleSolver
                 Console.WriteLine("Must supply input file");
                 return;
             }
-            if (inputFile.Contains("Day01"))
-            {
-                var solver = new Day01(inputFile);
-                Console.WriteLine($"Day01: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
-            }
-            if (inputFile.Contains("Day02"))
-            {
-                var solver = new Day02(inputFile);
-                Console.WriteLine($"Day02: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
-            }
-            if (inputFile.Contains("Day03"))
-            {
-                var solver = new Day03(inputFile);
-                Console.WriteLine($"Day03: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
-            }
+            ISolver solver;
+            string baseName = Path.GetFileName(inputFile);
+
+            string puzzleName = baseName.Remove(baseName.Length - 4);
+            Console.WriteLine($"puzzleName = {puzzleName}");
+
+            Type solverType = Type.GetType($"Solvers.{puzzleName}, Solvers");
+
+            solver = (ISolver)Activator.CreateInstance(solverType, inputFile);
+            Console.WriteLine($"{puzzleName}: Answer 1 = {solver.Answer1()}, Answer 2 = {solver.Answer2()}");
         }
     }
 }
