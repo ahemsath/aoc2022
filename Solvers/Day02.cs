@@ -58,7 +58,7 @@
             _inputFile = inputFile;
         }
 
-        public int Answer1()
+        public string Answer1()
         {
             int totalScore = 0;
             foreach (string line in File.ReadLines(_inputFile))
@@ -71,10 +71,10 @@
                 //Console.WriteLine($"Opp play = {opponentPlay}, my play = {myPlay}, shape score = {shapeScore}, move score = {moveScore}");
                 totalScore += currentScore;
             }
-            return totalScore;
+            return totalScore.ToString();
         }
 
-        public int Answer2()
+        public string Answer2()
         {
             int totalScore = 0;
             foreach (string line in File.ReadLines(_inputFile))
@@ -108,7 +108,7 @@
                 //Console.WriteLine($"Opp play = {opponentPlay}, my play = {myPlay}, shape score = {shapeScore}, move score = {moveScore}");
                 totalScore += currentScore;
             }
-            return totalScore;
+            return totalScore.ToString();
         }
     }
 }

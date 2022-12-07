@@ -12,7 +12,7 @@ namespace Solvers
             _inputFile = inputFile;
         }
 
-        public int Answer1()
+        public string Answer1()
         {
             int totalPriority = 0;
             foreach (string line in File.ReadLines(_inputFile))
@@ -45,10 +45,10 @@ namespace Solvers
                 }
 
             }
-            return totalPriority;
+            return totalPriority.ToString();
         }
 
-        public int Answer2()
+        public string Answer2()
         {
             int totalPriority = 0;
             int lineNum = 1;
@@ -85,7 +85,7 @@ namespace Solvers
                 }
                 lineNum++;
             }
-            return totalPriority;
+            return totalPriority.ToString();
         }
 
         private int GetPriorityForChar(char c)

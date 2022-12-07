@@ -2,7 +2,7 @@
 {
     public interface ISolver
     {
-        public int Answer1();
-        public int Answer2();
+        public string Answer1();
+        public string Answer2();
     }
 }

@@ -10,7 +10,7 @@
             _inputFile = inputFile;
         }
 
-        public int Answer1()
+        public string Answer1()
         {
             int totalContainedRanges = 0;
             foreach (string line in File.ReadLines(_inputFile))
@@ -24,10 +24,10 @@
                     totalContainedRanges++;
                 }
             }
-            return totalContainedRanges;
+            return totalContainedRanges.ToString();
         }
 
-        public int Answer2()
+        public string Answer2()
         {
             int totalOverlappingRanges = 0;
             foreach (string line in File.ReadLines(_inputFile))
@@ -41,7 +41,7 @@
                     totalOverlappingRanges++;
                 }
             }
-            return totalOverlappingRanges;
+            return totalOverlappingRanges.ToString();
         }
 
 
