@@ -43,6 +43,28 @@ namespace Solvers
 
         public string Answer2()
         {
+            // input is a single line of chars
+            string input = File.ReadAllText(_inputFile);
+            int windowStart = 0;
+            int windowEnd = 1;
+            while (windowEnd < input.Length)
+            {
+                if (windowEnd - windowStart == 14)
+                {
+                    return windowEnd.ToString();
+                }
+                for (int i = windowEnd - 1; i >= windowStart; i--)
+                {
+                    if (input[i] == input[windowEnd])
+                    {
+                        // found a repeat, set window start to the first char after the index of the repeated char
+                        windowStart = i + 1;
+                        //windowEnd++;
+                        break;
+                    }
+                }
+                windowEnd++;
+            }
             return string.Empty;
         }
     }
