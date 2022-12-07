@@ -90,7 +90,7 @@ namespace Solvers
 
         private int GetPriorityForChar(char c)
         {
-            int charAsInt = (int)c;
+            int charAsInt = c;
             if (charAsInt >= 97)
             {
                 // lower case letters
