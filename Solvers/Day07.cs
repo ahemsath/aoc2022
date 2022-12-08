@@ -4,20 +4,53 @@
     public class Day07 : ISolver
     {
         private string _inputFile;
+        private Directory _fsRoot;
+        private Dictionary<string, int> _directorySizes = new Dictionary<string, int>();
 
         public Day07(string inputFile)
         {
             _inputFile = inputFile;
+            _fsRoot = BuildFilesystem();
+            AddDirSizesToDictionary(_fsRoot, _directorySizes);
         }
 
         public string Answer1()
         {
+            // find sum of sizes of dirs with size <= 100000
+            int total = 0;
+            foreach (string dirName in _directorySizes.Keys)
+            {
+                Console.WriteLine($"size of dir {dirName} = {_directorySizes[dirName]}");
+                if (_directorySizes[dirName] <= 100000)
+                {
+                    Console.WriteLine($"found dir with size <100000: {dirName} {_directorySizes[dirName]}");
+                    total += _directorySizes[dirName];
+                    Console.WriteLine($"running total = {total}");
+                }
+            }
+
+            return total.ToString();
+        }
+
+        public string Answer2()
+        {
+            int totalDiskSpace = 70000000;
+            int neededDiskSpace = 30000000;
+
+            return string.Empty;
+        }
+
+        // Helper methods
+
+        private Directory BuildFilesystem()
+        {
             // init filesystem
-            Directory root = new Directory("", null);
+            Directory root = new Directory("/", null);
             Directory current = root;
 
-            foreach (string line in File.ReadLines(this._inputFile))
+            foreach (string line in File.ReadLines(_inputFile))
             {
+                Console.WriteLine("Building filesystem from input file");
                 if (line.StartsWith("$ "))
                 {
                     // this is a command
@@ -60,32 +93,16 @@
                     }
                 }
             }
-            // filesystem has been built, now find subdir sizes
-            Dictionary<string,int> directorySizes = new Dictionary<string,int>();
-            AddDirSizeToDictionary(root,directorySizes);
-
-            // find sum of sizes of dirs with size <= 100000
-            int total = 0;
-            foreach (string dirName in directorySizes.Keys)
-            {
-                Console.WriteLine($"size of dir {dirName} = {directorySizes[dirName]}");
-                if (directorySizes[dirName] <= 100000)
-                {
-                    Console.WriteLine($"found dir with size <100000: {dirName} {directorySizes[dirName]}");
-                    total += directorySizes[dirName];
-                    Console.WriteLine($"running total = {total}");
-                }
-            }
-
-            return total.ToString();
+            Console.WriteLine("Finished building filesystem from input\n\n");
+            return root;
         }
 
-        private void AddDirSizeToDictionary(Directory current, Dictionary<string,int> directorySizes)
+        private void AddDirSizesToDictionary(Directory current, Dictionary<string,int> directorySizes)
         {
             directorySizes[current.FullName] = current.Size;
             foreach (Directory dir in current.Subdirs)
             {
-                AddDirSizeToDictionary(dir, directorySizes);
+                AddDirSizesToDictionary(dir, directorySizes);
             }
         }
 
@@ -117,10 +134,6 @@
             }
         }
 
-        public string Answer2()
-        {
-            return string.Empty;
-        }
 
     }
 
@@ -161,7 +174,15 @@
                 {
                     return Name;
                 }
-                else return Parent.FullName + "/" + Name;
+                string parentFullName = Parent.FullName;
+                if (parentFullName == "/")
+                {
+                    return parentFullName + Name;
+                }
+                else
+                {
+                    return parentFullName + "/" + Name;
+                }
             }
         }
 
