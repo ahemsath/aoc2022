@@ -36,8 +36,23 @@
         {
             int totalDiskSpace = 70000000;
             int neededDiskSpace = 30000000;
+            int currentFreeSpace = totalDiskSpace - _directorySizes["/"];
+            int needToDeleteSize = neededDiskSpace - currentFreeSpace;
 
-            return string.Empty;
+            List<int> deletionCandidates = new List<int>();
+
+            Console.WriteLine($"Need to delete {needToDeleteSize} bytes, looking for candidates to delete");
+            foreach(string dirName in _directorySizes.Keys)
+            {
+                if (_directorySizes[dirName] >= needToDeleteSize)
+                {
+                    Console.WriteLine($"Found candidate dir {dirName} with size {_directorySizes[dirName]}");
+                    deletionCandidates.Add(_directorySizes[dirName]);
+                }
+            }
+
+            deletionCandidates.Sort();
+            return deletionCandidates.First().ToString();
         }
 
         // Helper methods
