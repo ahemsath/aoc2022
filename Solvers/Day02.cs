@@ -68,7 +68,6 @@
                 int shapeScore = _shapeScores[myPlay];
                 var moveScore = _moveScores[(opponentPlay,myPlay)];
                 int currentScore =  shapeScore + moveScore;
-                //Console.WriteLine($"Opp play = {opponentPlay}, my play = {myPlay}, shape score = {shapeScore}, move score = {moveScore}");
                 totalScore += currentScore;
             }
             return totalScore.ToString();
@@ -105,7 +104,6 @@
                 int shapeScore = _shapeScores[myPlay];
                 var moveScore = _moveScores[(opponentPlay, myPlay)];
                 int currentScore = shapeScore + moveScore;
-                //Console.WriteLine($"Opp play = {opponentPlay}, my play = {myPlay}, shape score = {shapeScore}, move score = {moveScore}");
                 totalScore += currentScore;
             }
             return totalScore.ToString();
