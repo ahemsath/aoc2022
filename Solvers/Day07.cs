@@ -13,7 +13,7 @@
         public string Answer1()
         {
             // init filesystem
-            Directory root = new Directory("/", null);
+            Directory root = new Directory("", null);
             Directory current = root;
 
             foreach (string line in File.ReadLines(this._inputFile))
@@ -71,18 +71,18 @@
                 Console.WriteLine($"size of dir {dirName} = {directorySizes[dirName]}");
                 if (directorySizes[dirName] <= 100000)
                 {
+                    Console.WriteLine($"found dir with size <100000: {dirName} {directorySizes[dirName]}");
                     total += directorySizes[dirName];
+                    Console.WriteLine($"running total = {total}");
                 }
             }
-
-
 
             return total.ToString();
         }
 
         private void AddDirSizeToDictionary(Directory current, Dictionary<string,int> directorySizes)
         {
-            directorySizes[current.Name] = current.Size;
+            directorySizes[current.FullName] = current.Size;
             foreach (Directory dir in current.Subdirs)
             {
                 AddDirSizeToDictionary(dir, directorySizes);
@@ -150,6 +150,18 @@
                     total += dir.Size;
                 }
                 return total;
+            }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                if (Parent == null)
+                {
+                    return Name;
+                }
+                else return Parent.FullName + "/" + Name;
             }
         }
 
