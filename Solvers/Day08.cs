@@ -110,11 +110,14 @@
 
         private int[,] GetTreeMap(string inputFile)
         {
-            // this can definitely be optimized to avoid having to read the file twice
-            (int height, int width) = GetTreeMapDimensions(inputFile);
+            string[] lines = File.ReadAllLines(inputFile);
+
+            int height = lines.Length;
+            int width = lines[0].Length;
+
             int [,] treeMap = new int[height, width];
             int row = 0;
-            foreach(string line in File.ReadLines(inputFile))
+            foreach(string line in lines)
             {
                 for (int column = 0; column<line.Length; column++)
                 {
@@ -125,25 +128,6 @@
 
             return treeMap;
         }
-        private (int height, int width) GetTreeMapDimensions(string inputFile)
-        {
-            // Assumption: input file contains lines of equal-length strings
-
-            bool first = true; // only calculate width once
-            int height = 0; // number of lines in file
-            int width = 0; // length of a line
-            foreach(string line in File.ReadLines(inputFile))
-            {
-                if (first)
-                {
-                    width = line.Length;
-                    first = false;
-                }
-                height++;
-            }
-            return (height, width);
-        }
-
     }
 
 }
