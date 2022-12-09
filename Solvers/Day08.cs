@@ -32,7 +32,7 @@
                 {
                     if (TreeIsVisible(row,column))
                     { 
-                        Console.WriteLine($"Tree at position {row},{column} is visible");
+                        //Console.WriteLine($"Tree at position {row},{column} is visible");
                         visibleTrees++;
                     }
                 }
@@ -42,7 +42,26 @@
 
         public string Answer2()
         {
-            return string.Empty;
+            // Calculate "scenic score" for each tree in map and return the maximum score
+            // A tree's scenic score is found by multiplying together its viewing distance in each of the four directions
+            //To measure the viewing distance from a given tree, look up, down, left, and right from that tree; stop if you reach an edge or at the first tree
+            //that is the same height or taller than the tree under consideration. (If a tree is right on the edge, at least one of its viewing distances will be zero.)
+            // Again, we can ignore the trees on the borders (because zero times anything is zero)
+
+            int numRows = _treeMap.GetLength(0);
+            int numCols = _treeMap.GetLength(1);
+            int maxScenicScore = 0;
+
+            for (int row = 1; row < numRows - 1; row++)
+            {
+                // same for the columns, ignore the first and last
+                for (int column = 1; column < numCols - 1; column++)
+                {
+                    maxScenicScore = Math.Max(maxScenicScore, ScenicScore(row, column));
+                }
+            }
+
+            return maxScenicScore.ToString();
         }
 
         private bool TreeIsVisible(int row, int column)
@@ -107,6 +126,63 @@
 
             return visibleUp || visibleDown || visibleLeft || visibleRight;
         }
+
+        private int ScenicScore(int row, int column)
+        {
+            int numRows = _treeMap.GetLength(0);
+            int numCols = _treeMap.GetLength(1);
+
+            int height = _treeMap[row, column];
+
+            int viewDistanceUp = 0;
+            int viewDistanceDown = 0;
+            int viewDistanceLeft = 0;
+            int viewDistanceRight = 0;
+
+            // check up
+            for (int i = row - 1; i >= 0; i--)
+            {
+                viewDistanceUp++;
+                if (_treeMap[i, column] >= height)
+                {
+                    break;
+                }
+            }
+
+            // check down
+            for (int i = row + 1; i < numRows; i++)
+            {
+                viewDistanceDown++;
+                if (_treeMap[i, column] >= height)
+                {
+                    break;
+                }
+            }
+
+            // check left
+            for (int i = column - 1; i >= 0; i--)
+            {
+                viewDistanceLeft++;
+                if (_treeMap[row, i] >= height)
+                {
+                    break;
+                }
+            }
+
+            // check right
+            for (int i = column + 1; i < numCols; i++)
+            {
+                viewDistanceRight++;
+                if (_treeMap[row, i] >= height)
+                {
+                    break;
+                }
+            }
+
+            return viewDistanceUp * viewDistanceDown * viewDistanceLeft * viewDistanceRight;
+        }
+
+
 
         private int[,] GetTreeMap(string inputFile)
         {
